@@ -1,9 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
-import React, {useState} from 'react';
+import { MsalProvider } from "@azure/msal-react";
+import { SignInButton } from './SignInButton';
 
 
- function App() {
+
+ function App({msalInstance}) {
   var usuario = "";
   var contrasenia = "";
   async function login(){
@@ -13,9 +15,6 @@ import React, {useState} from 'react';
       headers: {
         'content-type': 'application/json',
         'Accept': 'application/json'
-        // 'Access-Control-Allow-Origin': '*',
-        // 'mode': "no-cors",
-        // 'credentials': 'include'  
       }
     });
     console.log(JSON.stringify(result))
@@ -23,6 +22,8 @@ import React, {useState} from 'react';
   }
 
   return (
+    <MsalProvider instance={msalInstance}>
+
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
@@ -37,11 +38,15 @@ import React, {useState} from 'react';
                 <button onClick={login} className="btn btn-primary">Login</button>
                 <br/>
                 <br/>
-                <button className="btn btn-success">Login with Microsoft</button>
+                  <div className="container">
+                  <SignInButton />
+                  </div>
+                {/* <button className="btn btn-success">Login with Microsoft</button> */}
               </div>
         </div>
       </header>
     </div>
+    </MsalProvider>
   );
 }
 

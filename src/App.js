@@ -1,8 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
-import { MsalProvider } from "@azure/msal-react";
+import { MsalProvider} from "@azure/msal-react";
 import { SignInButton } from './SignInButton';
-
+import { Nombre } from './Nombre';
 
 
  function App({msalInstance}) {
@@ -17,8 +17,7 @@ import { SignInButton } from './SignInButton';
         'Accept': 'application/json'
       }
     });
-    console.log(JSON.stringify(result))
-    console.log(result.json())
+    console.log(result.json());
   }
 
   return (
@@ -28,22 +27,21 @@ import { SignInButton } from './SignInButton';
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
           <h1>Login page</h1>
-          <div>
+            <div>
               <div className="col-sm-10 offset-sm-0">
                 <input type="text" placeholder="usuario" onChange={(e)=>(usuario = e.target.value)} className="from-control"></input>
-                <br/>
+                  <br/>
                 <input type="password" placeholder="contraseña" onChange={(e)=>(contrasenia = e.target.value)}className="from-control"></input>
-                <br/>
-                <br/>
+                  <br/>
+                  <br/>
                 <button onClick={login} className="btn btn-primary">Login</button>
-                <br/>
-                <br/>
-                  <div className="container">
-                  <SignInButton />
-                  </div>
-                {/* <button className="btn btn-success">Login with Microsoft</button> */}
+                  <br/>
+                  <br/>
+                    <div className="container">
+                      <SignInButton />
+                    </div>
               </div>
-        </div>
+            </div>
       </header>
     </div>
     </MsalProvider>

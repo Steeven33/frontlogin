@@ -6,8 +6,12 @@ export const SignInButton = () => {
         instance.loginRedirect({
             scopes: ['user.read']
         });
+        
+        
+
     }
     return (
         <button className='btn btn-success' onClick={handleSignIn}>Login with Microsoft</button> 
+        
     )
 };

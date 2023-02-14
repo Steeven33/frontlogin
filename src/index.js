@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { PublicClientApplication } from '@azure/msal-browser';
+import { PublicClientApplication, EventType } from '@azure/msal-browser';
 
 const pca = new PublicClientApplication({
   auth:{
@@ -11,6 +11,13 @@ const pca = new PublicClientApplication({
       authority: 'https://login.microsoftonline.com/ea2f93f7-4932-4660-b329-869605f41b38',
       redirectUri: '/', 
   } 
+});
+
+pca.addEventCallback(event => {
+  if (event.eventType === EventType.LOGIN_SUCCESS) {
+    pca.setActiveAccount(event.payload.account);
+    console.log(event);
+  }
 });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

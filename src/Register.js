@@ -1,12 +1,12 @@
 import { SignInButton } from "./SignInButton"
 import React, { useState } from "react";
+import { Home } from "./Home";
+import logo from './logo.svg';
 
 
 export const Register = ()=>{
     var usuario = "";
     var contrasenia = "";
-    
-    
     
     const [data, setData] = useState(null);
     function login(){
@@ -25,20 +25,40 @@ export const Register = ()=>{
     }
     return(
         <div>
-            {data === null ? <div>
-                <h1>Login page</h1>
+            <div>
+                {data === null ? 
                     <div>
-                        <div className="col-sm-10 offset-sm-0">
-                            <input type="text" placeholder="usuario" onChange={(e)=>(usuario = e.target.value)} className="from-control"></input><br/>
-                            <input type="password" placeholder="contraseña" onChange={(e)=>(contrasenia = e.target.value)}className="from-control"></input><br/>
-                            <button onClick={login} className="btn btn-primary">Login</button><br/>
-                                <div className="container">
-                                    <SignInButton />
+                        <img src={logo} className="App-logo" alt="logo" />
+                        <h1>Login page</h1>
+                            <div>
+                                <div className="col-sm-10 offset-sm-0">
+                                    <input type="text" placeholder="usuario" onChange={(e)=>(usuario = e.target.value)} className="from-control"></input><br/>
+                                    <input type="password" placeholder="contraseña" onChange={(e)=>(contrasenia = e.target.value)}className="from-control"></input><br/>
+                                    <button onClick={login} className="btn btn-primary">Login</button><br/>
+                                        <div className="container">
+                                            <SignInButton />
+                                        </div>
                                 </div>
-                        </div>
+                            </div>
                     </div>
+                : data === false ?  
+                <div>
+                    <img src={logo} className="App-logo" alt="logo" />
+                        <h1>Login page</h1>
+                            <p>contraseña o usuario incorrecto</p>
+                                <div>
+                                    <div className="col-sm-10 offset-sm-0">
+                                        <input type="text" placeholder="usuario" onChange={(e)=>(usuario = e.target.value)} className="from-control"></input><br/>
+                                        <input type="password" placeholder="contraseña" onChange={(e)=>(contrasenia = e.target.value)}className="from-control"></input><br/>
+                                        <button onClick={login} className="btn btn-primary">Login</button><br/>
+                                            <div className="container">
+                                                <SignInButton />
+                                            </div>
+                                    </div>
+                                </div>
                 </div>
-            : data === false ?  <p>usuario o contraseña erroneos</p>: <p>logueo exitoso</p>}
+                : <Home />}
+            </div>
         </div>
     )
 }

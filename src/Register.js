@@ -8,7 +8,7 @@ export const Register = ()=>{
     
     
     
-    const [data, setData] = useState(false);
+    const [data, setData] = useState(null);
     function login(){
     var url = "https://localhost:7157/api/Usuario/Get?nombre=" + usuario  + "&contrasenia=" + contrasenia;
     const result = fetch(url, {
@@ -25,8 +25,7 @@ export const Register = ()=>{
     }
     return(
         <div>
-            {data ? <p>logueo exitoso</p>: <p>no logueado</p>}
-            <div>
+            {data === null ? <div>
                 <h1>Login page</h1>
                     <div>
                         <div className="col-sm-10 offset-sm-0">
@@ -38,7 +37,8 @@ export const Register = ()=>{
                                 </div>
                         </div>
                     </div>
-            </div>
+                </div>
+            : data === false ?  <p>usuario o contraseña erroneos</p>: <p>logueo exitoso</p>}
         </div>
     )
 }

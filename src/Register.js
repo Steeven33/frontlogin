@@ -31,8 +31,6 @@ export const Register = ()=>{
             "email": usuario,
             "password": contrasenia
         })
-
-
     }).then(res => res.json()).then(info => {
         setData(info.token);
     });

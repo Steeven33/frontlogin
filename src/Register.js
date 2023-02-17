@@ -1,7 +1,9 @@
 import { SignInButton } from "./SignInButton"
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Home } from "./Home";
 import logo from './logo.svg';
+import { useMsal } from "@azure/msal-react";
+
 
 
 export const Register = ()=>{
@@ -11,33 +13,51 @@ export const Register = ()=>{
     
     const [data, setData] = useState("");
     const [response, setResponse] = useState("");
+    const { instance } = useMsal();
+    const [userconfival, setUserconfival] = useState('');
 
-    function login(){
-    var url = "/api/cuentas/inicioSesion?secret=44c4ec5dec97a44efa4ade06f7eb4b27030ffc980c5d6960c333c4fa5581734f";
-    const result = fetch(url, {
-        method: 'POST',
-        headers: {
-        'content-type': 'application/json',
-        'Accept': 'text/plain',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers' : 'Content-Type',
-        'mode': 'no-cors',
-        'referrerPolicy': 'no-referrer',
-        'withCredentials': true,    
-        'crossorigin': true  
-        },
-        body: JSON.stringify({
-            "id": id,
-            "email": usuario,
-            "password": contrasenia
-        })
-    }).then(res => res.json()).then(info => {
-        setData(info.token);
-    });
-    setResponse(result.value);
+    if(userconfival.length < 0){
+        window.location.reload()
     }
-    return(
-        <div>
+    
+    useEffect(() => {
+        const currentAccount = instance.getActiveAccount();
+        if(currentAccount){
+            var x = currentAccount.username;
+            setUserconfival(x);
+            console.log(x);
+            
+        }
+    }, [instance]);
+    console.log(userconfival);
+    
+    
+    function login(){
+        var url = "/api/cuentas/inicioSesion?secret=44c4ec5dec97a44efa4ade06f7eb4b27030ffc980c5d6960c333c4fa5581734f";
+        const result = fetch(url, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                'Accept': 'text/plain',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers' : 'Content-Type',
+                'mode': 'no-cors',
+                'referrerPolicy': 'no-referrer',
+                'withCredentials': true,    
+                'crossorigin': true  
+            },
+            body: JSON.stringify({
+                "id": id,
+                "email": usuario,
+                "password": contrasenia
+            })
+            }).then(res => res.json()).then(info => {
+                setData(info.token);
+            });
+            setResponse(result.value);
+}
+return(
+    <div>
             <div>
                 {data === "" && response === undefined? 
                     <div>
@@ -55,7 +75,8 @@ export const Register = ()=>{
                                 </div>
                             </div>
                     </div>
-                : data === "" ?  
+                : 
+                userconfival.length > 0 ? <Home /> : data === "" ?
                 <div>
                     <img src={logo} className="App-logo" alt="logo" />
                     <h1>Login page</h1>
@@ -70,7 +91,7 @@ export const Register = ()=>{
                             </div>
                         </div>
                 </div>
-                : data.length === 129 ? <Home /> : data = null}
+                : data.length === 129  ? <Home />  :  data = null }
             </div>
         </div>
     )

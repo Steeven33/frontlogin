@@ -9,14 +9,14 @@ const pca = new PublicClientApplication({
   auth:{
       clientId: 'e1560722-5489-45ce-b041-81bd7f77ddf2',
       authority: 'https://login.microsoftonline.com/ea2f93f7-4932-4660-b329-869605f41b38',
-      redirectUri: '/', 
+      redirectUri: 'http://localhost:44338', 
   } 
 });
 
 pca.addEventCallback(event => {
   if (event.eventType === EventType.LOGIN_SUCCESS) {
     pca.setActiveAccount(event.payload.account);
-    console.log(event);
+    window.location.reload();
   }
 });
 

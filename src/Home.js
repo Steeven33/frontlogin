@@ -20,6 +20,7 @@ export const Home = ()=>{
     }
     return(
         <div>
+            <h1>Bienvenido al Home</h1>
             <button className="btn btn-primary" onClick={Get}>Obtener Pagadurias</button>
             <br />
             <table className="table">

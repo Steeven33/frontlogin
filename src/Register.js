@@ -54,14 +54,17 @@ export const Register = ()=>{
         }).then(res => res.json()).then(info => {
             setData(info.token);
         });
-        setResponse(result.value);
+        
+        
+        
+        
+        
     }
-
     return(
-        <ContextExternos.Provider value={{ userName: userexterno, tokenDefault: data }}>
+        <ContextExternos.Provider value={{ userName: userexterno}}>
             <div>
                     <div>
-                        {data === "" && response === undefined? 
+                        {data === undefined? 
                             <div>
                                 <img src={logo} className="App-logo" alt="logo" />
                                 <h1>Login page</h1>
@@ -93,10 +96,12 @@ export const Register = ()=>{
                                     </div>
                                 </div>
                         </div>
-                        : data.length === 129  ? <Home />  
+                        : 
+                        data.length === 129  ? <Home />  
                         :
                         userexterno.length > 0 ? <Home />
-                        : data = null }
+                        : 
+                        data = null }
                     </div>
                 </div>
       </ContextExternos.Provider>

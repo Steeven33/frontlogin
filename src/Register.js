@@ -1,7 +1,6 @@
 import { SignInButton } from "./SignInButton"
 import React, { useState, useEffect } from "react";
-import { Home } from "./Home";
-import logo from './logo.svg';
+import { Home } from "./Components/Home";
 import { useMsal } from "@azure/msal-react";
 import ContextExternos from './Context/ContextExternos';
 
@@ -58,7 +57,6 @@ export const Register = ()=>{
                     <div>
                         {data === undefined ? 
                             <div>
-                                <img src={logo} className="App-logo" alt="logo" />
                                 <h1>Login page</h1>
                                 <p>contraseña o usuario incorrecto</p>
                                 <div>
@@ -94,7 +92,6 @@ export const Register = ()=>{
                         :
                         data === "" ?
                         <div>
-                            <img src={logo} className="App-logo" alt="logo" />
                             <h1>Login page</h1><br/>
                                 <div>
                                     <div className="row">

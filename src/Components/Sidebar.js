@@ -9,10 +9,41 @@ import {
 } from "@ant-design/icons/lib/icons";
 
 const Sidebar = () => {
+    return(
+        <>
+            <div>
+                <Header />
+                    <div style={{display: "flex", flexDirection: 'row'}}>
+                        <SiderMenu />
+                        <Content />
+                    </div>
+                <Footer />
+            </div>
+        </>
+    )
+    
+}
+
+function Header(){
+    return(
+        <>
+            <div>Header</div>
+        </>
+    )
+}
+
+function Footer(){
+    return(
+        <>
+            <div>Footer</div>
+        </>
+    )
+}
+
+function SiderMenu(){
     const navigate = useNavigate()
     return(
         <>
-        <div style={{display: "flex", flexDirection: 'row'}}>
             <Menu 
             onClick={({ key }) => { navigate(key) }}
             items={[
@@ -22,11 +53,10 @@ const Sidebar = () => {
                 { label: "Configuracion", key: "/configuracion", icon: <KeyOutlined />}    
                 ]}>
             </Menu>
-            <Content />
-        </div>
         </>
     )
 }
+
 function Content(){
     return(
         <Routes>

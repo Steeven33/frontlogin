@@ -1,14 +1,24 @@
 .documentos-submenu {
     width: 10rem;
     position: absolute;
+    top: 67px;
     list-style: none;
     text-align: start;
 }
 
 .documentos-submenu li {
-    background-color: rgb(0, 212, 212);
+    background: rgb(0, 212, 212);
     cursor: pointer;
 }
+
+.documentos-submenu li a:hover{
+    background: rgb(0, 175, 175);
+}
+
+.documentos-submenu.clicked {
+    display: none;
+}
+
 
 .submenu-item {
     display: block;
@@ -18,3 +28,4 @@
     color: white;
     padding: 16px;
 }
+

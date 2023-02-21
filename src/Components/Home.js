@@ -29,31 +29,31 @@ export const Home = ()=>{
     return(
         <div>
             <BrowserRouter>
-                <Navbar />
-                    <h1>Bienvenido al Home</h1>
-                    <button className="btn btn-primary" onClick={Get}>Obtener Pagadurias</button>
-                    <br />
-                    <table className="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Entidad</th>
-                                <th scope="col">Nemo Tecnico</th>
-                                <th scope="col">codigo Secundario 1</th>
-                                <th scope="col">codigo Secundario 2</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {pagadurias.map((item) => {
-                                return <PagaduriaDTO
-                                key={item.id} 
-                                nombre={item.nombre}
-                                nemotecnico={item.nemotecnico}
-                                codSecundario1={item.codSecundario1}
-                                codSecundario2={item.codSecundario2}
-                                />
-                            })}
-                        </tbody>
-                    </table>
+                    <Navbar />
+                        <h1>Bienvenido al Home</h1>
+                        <button className="btn btn-primary" onClick={Get}>Obtener Pagadurias</button>
+                        <br />
+                        <table className="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Entidad</th>
+                                    <th scope="col">Nemo Tecnico</th>
+                                    <th scope="col">codigo Secundario 1</th>
+                                    <th scope="col">codigo Secundario 2</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {pagadurias.map((item) => {
+                                    return <PagaduriaDTO
+                                    key={item.id} 
+                                    nombre={item.nombre}
+                                    nemotecnico={item.nemotecnico}
+                                    codSecundario1={item.codSecundario1}
+                                    codSecundario2={item.codSecundario2}
+                                    />
+                                })}
+                            </tbody>
+                        </table>
             </BrowserRouter>
         </div>
     )

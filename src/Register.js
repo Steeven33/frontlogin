@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Home } from "./Components/Home";
 import { useMsal } from "@azure/msal-react";
 import ContextExternos from './Context/ContextExternos';
-
+import Inicio from "./Components/Inicio";
 
 export const Register = ()=>{
 
@@ -122,10 +122,10 @@ export const Register = ()=>{
                                 </div>
                         </div>
                         : 
-                        data.length === 129  ? <Home />  
+                        data.length === 129  ? <Inicio />  
                         :
-                        userexterno.length > 0 ? <Home />
-                        : 
+                        // userexterno.length > 0 ? <Home />
+                        // : 
                         data = null }
                     </div>
                 </div>

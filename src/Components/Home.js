@@ -1,8 +1,7 @@
 import React, { useState, useContext } from "react";
 import ContextExternos from "../Context/ContextExternos";
 import PagaduriaDTO from "../DTO/PagaduriaDTO";
-import Navbar from "./Navbar"
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
 export const Home = ()=>{
     const contextPrueba = useContext(ContextExternos)
@@ -29,7 +28,6 @@ export const Home = ()=>{
     return(
         <div>
             <BrowserRouter>
-                    <Navbar />
                         <h1>Bienvenido al Home</h1>
                         <button className="btn btn-primary" onClick={Get}>Obtener Pagadurias</button>
                         <br />

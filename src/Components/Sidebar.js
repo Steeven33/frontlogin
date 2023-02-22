@@ -10,6 +10,8 @@ import {
 } from "@ant-design/icons/lib/icons";
 import ContextExternos from "../Context/ContextExternos";
 import {Row, Col} from "antd"
+import { SignOutButton } from "./SignOutButton";
+import { Button } from 'antd';
 
 const Sidebar = () => {
     return(
@@ -40,15 +42,15 @@ function Header(){
     }
     return(
         <>
-            <Row style={{textAlign: 'center', height: 60, backgroundColor: '#17202A', color: '#FDFEFE',}}>
-                <Col style={{alignItems: 'center', display: "flex", justifyContent: 'center',}}  span={8} >
+            <Row style={{textAlign: 'center', height: 60, backgroundColor: '#17202A', color: '#FDFEFE'}}>
+                <Col style={{alignItems: 'center', display: "flex", justifyContent: 'center'}}  span={7} >
                     <p>logo</p>
                 </Col>
-                <Col span={8}>
-                    <h4> <UserOutlined /> Bienvenido, {usuarioLogin}</h4>
+                <Col style={{alignItems: 'center', display: "flex", justifyContent: 'center'}} span={9}>
+                <h6><UserOutlined /></h6> <h4>Bienvenido, {usuarioLogin} </h4> 
                 </Col>
-                <Col span={8}>
-                    <p>boton logout</p>
+                <Col style={{alignItems: 'center', display: "flex", justifyContent: 'end'}} span={7}>
+                    {context.userConfival === "" ? <Button type="primary" style={{ background: '#E74C3C', borderColor: '#7B241C' }}>Sign Out</Button> : <SignOutButton />}
                 </Col>
             </Row>
         </>

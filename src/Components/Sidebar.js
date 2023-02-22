@@ -40,6 +40,10 @@ function Header(){
     }else{
         usuarioLogin = context.userConfival
     }
+    function SignOut(){
+        sessionStorage.clear();
+        window.location.reload();
+    }
     return(
         <>
             <Row style={{textAlign: 'center', height: 60, backgroundColor: '#17202A', color: '#FDFEFE'}}>
@@ -50,7 +54,7 @@ function Header(){
                     <h6><UserOutlined /></h6> <h4>Bienvenido, {usuarioLogin} </h4> 
                 </Col>
                 <Col style={{alignItems: 'center', display: "flex", justifyContent: 'end'}} span={7}>
-                    {context.userConfival === "" ? <Button type="primary" style={{ background: '#E74C3C', borderColor: '#7B241C' }}>Sign Out</Button> : <SignOutButton />}
+                    {context.userConfival === "" ? <Button type="primary" style={{ background: '#E74C3C', borderColor: '#7B241C' }} onClick={SignOut}>Sign Out</Button> : <SignOutButton />}
                 </Col>
             </Row>
         </>

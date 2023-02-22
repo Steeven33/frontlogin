@@ -47,7 +47,7 @@ function Header(){
                     <p>logo</p>
                 </Col>
                 <Col style={{alignItems: 'center', display: "flex", justifyContent: 'center'}} span={9}>
-                <h6><UserOutlined /></h6> <h4>Bienvenido, {usuarioLogin} </h4> 
+                    <h6><UserOutlined /></h6> <h4>Bienvenido, {usuarioLogin} </h4> 
                 </Col>
                 <Col style={{alignItems: 'center', display: "flex", justifyContent: 'end'}} span={7}>
                     {context.userConfival === "" ? <Button type="primary" style={{ background: '#E74C3C', borderColor: '#7B241C' }}>Sign Out</Button> : <SignOutButton />}

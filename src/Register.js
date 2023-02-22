@@ -12,18 +12,25 @@ export const Register = ()=>{
     var usuario = "";
     var contrasenia = "";
     var id = "8b4d2abb-713b-4731-a7b0-d89b358cb8eb";
-    
+
     const [data, setData] = useState("");
     const { instance } = useMsal();
     const [userconfival, setUserconfival] = useState('');
     const [userexterno, setUserexterno] = useState('');
 
-    // mantiene el context de microsoft con login
+    // mantiene el context de microsoft con login y de lo contrario mantiene el context ContextExternos
     useEffect(() => {
         const currentAccount = instance.getActiveAccount();
+        let currentAccountE = sessionStorage.getItem('username')
         if(currentAccount){
             var nombreUsuario = currentAccount.username;
             setUserconfival(nombreUsuario);
+        }else{
+            var mantener = "lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll8888888888888888888888888888888llllllllllllllllllllllllllllllluuuuuu";
+            if(currentAccountE !== null){
+                setData(mantener)
+                setUserexterno(currentAccountE)
+            }
         }
     }, [instance]);
     
@@ -50,6 +57,7 @@ export const Register = ()=>{
             })
         }).then(res => res.json()).then(info => {
             setData(info.token);
+            sessionStorage.setItem('username', usuario);
         });
     }
     return(

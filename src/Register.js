@@ -1,9 +1,10 @@
 import { SignInButton } from "./SignInButton"
 import React, { useState, useEffect } from "react";
-import { Home } from "./Components/Home";
 import { useMsal } from "@azure/msal-react";
 import ContextExternos from './Context/ContextExternos';
 import Inicio from "./Components/Inicio";
+import { Card, Space, Row } from "antd";
+
 
 export const Register = ()=>{
 
@@ -56,70 +57,74 @@ export const Register = ()=>{
             <div>
                     <div>
                         {data === undefined ? 
-                            <div>
-                                <h1>Login page</h1>
-                                <p>contraseña o usuario incorrecto</p>
+                            <div >
                                 <div>
-                                    <div className="row">
-                                        <div className="offset-lg-1 col-lg-11">
-                                            <div className="card">
-                                                <div className="card-header">
-                                                    <h2>Bienvenido</h2>
+                                    <Row style={{alignItems: 'center', display: "flex", justifyContent: 'center'}}>
+                                        <h1>Login page</h1><br/>
+                                    </Row>
+                                    <Row style={{alignItems: 'center', display: "flex", justifyContent: 'center'}}>
+                                        <p>contraseña o usuario incorrecto</p>
+                                    </Row>
+                                </div>
+                                <div>
+                                    <Row style={{alignItems: 'center', display: "flex", justifyContent: 'center'}}>
+                                        <Space direction="Vertical" size={16}>
+                                            <Card 
+                                                title="Valuez BPM" 
+                                                style={{width: 300}}>
+                                                <div className="form-group">
+                                                        <label>Usuario<span className="errmsg">*</span></label><br/>
+                                                        <input type="text" placeholder="tonystark@hotmaill.com" onChange={(e)=>(usuario = e.target.value)} className="from-control"></input>
                                                 </div>
-                                                <div className="card-body">
-                                                    <div className="form-group">
-                                                        <label>Usuario<span className="errmsg">*</span></label>
-                                                        <input type="text" placeholder="usuario" onChange={(e)=>(usuario = e.target.value)} className="from-control"></input>
-                                                    </div><br/>
-                                                    <div className="form-group">
-                                                        <label>Password<span className="errmsg">*</span></label>
-                                                        <input type="password" placeholder="contraseña" onChange={(e)=>(contrasenia = e.target.value)}className="from-control"></input><br/>
-                                                    </div><br/>
-                                                    <div className="form-group">
-                                                        <button onClick={login} className="btn btn-primary">Login</button><br/>
-                                                    </div>
+                                                <br/>
+                                                <div className="form-group">
+                                                    <label>Password<span className="errmsg">*</span></label><br/>
+                                                    <input type="password" placeholder="***********" onChange={(e)=>(contrasenia = e.target.value)}className="from-control"></input><br/>
+                                                </div><br/>
+                                                <div className="form-group">
+                                                    <button onClick={login} className="btn btn-primary">Login</button><br/>
                                                 </div>
-                                                <div className="card-footer">
-                                                    <div className="container"><SignInButton /></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                                <br/><hr />
+                                                <SignInButton />
+                                            </Card>
+                                        </Space>
+                                    </Row>
                                 </div>
                             </div>
                         : 
-                        userconfival.length > 0 ? <Home /> 
+                        userconfival.length > 0 ? <Inicio /> 
                         :
                         data === "" ?
-                        <div>
-                            <h1>Login page</h1><br/>
-                                <div>
-                                    <div className="row">
-                                        <div className="offset-lg-1 col-lg-11">
-                                            <div className="card">
-                                                <div className="card-header">
-                                                    <h2>Bienvenido</h2>
-                                                </div>
-                                                <div className="card-body">
-                                                    <div className="form-group">
-                                                        <label>Usuario<span className="errmsg">*</span></label>
-                                                        <input type="text" placeholder="usuario" onChange={(e)=>(usuario = e.target.value)} className="from-control"></input>
-                                                    </div><br/>
-                                                    <div className="form-group">
-                                                        <label>Password<span className="errmsg">*</span></label>
-                                                        <input type="password" placeholder="contraseña" onChange={(e)=>(contrasenia = e.target.value)}className="from-control"></input><br/>
-                                                    </div><br/>
-                                                    <div className="form-group">
-                                                        <button onClick={login} className="btn btn-primary">Login</button><br/>
-                                                    </div>
-                                                </div>
-                                                <div className="card-footer">
-                                                    <div className="container"><SignInButton /></div>
-                                                </div>
+                        <div >
+                            <div>
+                                <Row style={{alignItems: 'center', display: "flex", justifyContent: 'center'}}>
+                                    <h1>Login page</h1>
+                                </Row>
+                            </div>
+                            <div>
+                                <Row style={{alignItems: 'center', display: "flex", justifyContent: 'center'}}>
+                                    <Space direction="Vertical" size={16}>
+                                        <Card 
+                                            title="Valuez BPM" 
+                                            style={{width: 300}}>
+                                            <div className="form-group">
+                                                <label>Usuario<span className="errmsg">*</span></label><br/>
+                                                <input type="text" placeholder="tonystark@hotmaill.com" onChange={(e)=>(usuario = e.target.value)} className="from-control"></input>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                            <br/>
+                                            <div className="form-group">
+                                                <label>Password<span className="errmsg">*</span></label><br/>
+                                                <input type="password" placeholder="***********" onChange={(e)=>(contrasenia = e.target.value)}className="from-control"></input><br/>
+                                            </div><br/>
+                                            <div className="form-group">
+                                                <button onClick={login} className="btn btn-primary">Login</button><br/>
+                                            </div>
+                                            <br/><hr />
+                                            <SignInButton />
+                                        </Card>
+                                    </Space>
+                                </Row>
+                            </div>
                         </div>
                         : 
                         data.length === 129  ? <Inicio />  

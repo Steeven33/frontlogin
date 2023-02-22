@@ -110,7 +110,7 @@ function SiderMenu(){
                     ]
                 },
                 { label: "Configuracion", key: "/configuracion", icon: <KeyOutlined />}    
-                ]}>
+            ]}>
             </Menu>
         </>
     )

@@ -4,6 +4,7 @@ import { useMsal } from "@azure/msal-react";
 import ContextExternos from './Context/ContextExternos';
 import Inicio from "./Components/Inicio";
 import { Card, Space, Row } from "antd";
+import Sidebar from "./Components/Sidebar";
 
 
 export const Register = ()=>{
@@ -100,7 +101,7 @@ export const Register = ()=>{
                                 </div>
                             </div>
                         : 
-                        userconfival.length > 0 ? <Inicio /> 
+                        userconfival.length > 0 ? <Sidebar /> 
                         :
                         data === "" ?
                         <div >

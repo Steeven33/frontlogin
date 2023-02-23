@@ -37,6 +37,9 @@ export const Register = ()=>{
     
     // permiste iniciar sesion de externos
     function login(){
+        
+
+
         setUserexterno(usuario);
         var url = "/api/cuentas/inicioSesion?secret=44c4ec5dec97a44efa4ade06f7eb4b27030ffc980c5d6960c333c4fa5581734f";
         const result = fetch(url, {

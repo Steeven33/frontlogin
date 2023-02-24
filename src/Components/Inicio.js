@@ -6,8 +6,6 @@ import OtpInput from "otp-input-react";
 import { Button } from "antd";
 import { LoadingOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
-import { auth } from "../firebase.config";
-import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { toast, Toaster } from "react-hot-toast";
 
 const Inicio = () => {
@@ -16,50 +14,40 @@ const Inicio = () => {
     const [otp, setOtp] = useState(false);
     const [loading, setLoading] = useState(false);
     const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
-    var telefono = "+573194383257";
     const context = useContext(ContextExternos);
     const [btn, setBtn] = useState(false);
+    const [code2FA2, setCode2FA2] = useState(null);
+    console.log(code2FA2);
 
-    function onCaptchaVerifier(){
-        if(!window.recaptchaVerifier){
-            window.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
-                'size': 'invisible',
-                'callback': (response) => {
-                  onSignup()
-                },
-                'expired-callback': () => {
-                }
-            }, auth);
-        }
-    }
 
     function onSignup(){
-        setBtn(true)
-        setLoading(true)
-        onCaptchaVerifier()
-        const appVerifier = window.recaptchaVerifier
-        signInWithPhoneNumber(auth, telefono, appVerifier)
-        .then((confirmationResult) => {
-            window.confirmationResult = confirmationResult;
-            setLoading(false);
-            toast.success('Codigo OTP enviado exitosamente')
-        }).catch((error) => {
-            console.log(error);
-            setLoading(false)
-        });
+        setBtn(true);
+        setLoading(true);
+        setCode2FA2(Math.floor(100000 + Math.random() * 900000));
+        if(window.Email){
+            window.Email.send({
+                Host : "smtp.elasticemail.com",
+                Username : "stev-medina@hotmail.com",
+                Password : "0D6C3B87C15E75F32771DDEE4F4E6B38EABA",
+                To : "steeven415@gmail.com",
+                From : "stev-medina@hotmail.com",
+                Subject : "This is the subject",
+                Body : "And this is the body2"
+            }).then(()=> {
+                toast.success('Codigo 2FA enviado exitosamente');
+                setLoading(false);
+            }).catch((error) => {
+                console.log(error);
+            })
+        }
     }
-
+    
     function onOTPVerify(){
         setLoading(true);
-        window.confirmationResult.confirm(otp).then(async(res) => {
-            console.log(res);
-            setOtpvalid(true);
-            setLoading(false);
-        }).catch((err) => {
-            console.log(err);
-            setLoading(false);
-            toast.success('Codigo OTP erroneo')
-        })
+        // logica que me permita comparar las dos variables
+
+        setLoading(false);
+
     }
 
     function SignOut(){
@@ -104,7 +92,7 @@ const Inicio = () => {
                                     {
                                         loading && <Spin indicator={antIcon} />
                                     }
-                                    <span style={{fontWeight: 'bold'}} onClick={onSignup}>Solicitar OTP</span>
+                                    <span style={{fontWeight: 'bold'}} onClick={onSignup}>Solicitar 2FA</span>
                                     </Button>
                                 }
                                 <hr/>
@@ -113,6 +101,7 @@ const Inicio = () => {
                         </div>
 
                     </div>
+                    
                 </div>
             : <Sidebar />}
         </>

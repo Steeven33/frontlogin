@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useMsal } from "@azure/msal-react";
 import ContextExternos from './Context/ContextExternos';
 import Inicio from "./Components/Inicio";
-import { Card, Space, Row } from "antd";
+import { Card, Space, Row, Button } from "antd";
 import Sidebar from "./Components/Sidebar";
 
 
@@ -18,6 +18,7 @@ export const Register = ()=>{
     const { instance } = useMsal();
     const [userconfival, setUserconfival] = useState('');
     const [userexterno, setUserexterno] = useState('');
+    const [valid2FA, setValid2FA] = useState(false);
 
     // mantiene el context de microsoft con login y de lo contrario mantiene el context ContextExternos
     useEffect(() => {
@@ -28,18 +29,23 @@ export const Register = ()=>{
             setUserconfival(nombreUsuario);
         }else{
             var mantener = "lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll8888888888888888888888888888888llllllllllllllllllllllllllllllluuuuuu";
-            if(currentAccountE !== null){
-                setData(mantener)
-                setUserexterno(currentAccountE)
+            if(currentAccountE !== null ){
+                if(currentAccountE.includes("2FA")){
+                    setUserexterno(currentAccountE)
+                    setValid2FA(true)
+
+                }else{
+                    setData(mantener)
+                    setUserexterno(currentAccountE)
+                }
             }
         }
     }, [instance]);
+
+    console.log(valid2FA);
     
     // permiste iniciar sesion de externos
     function login(){
-        
-
-
         setUserexterno(usuario);
         var url = "/api/cuentas/inicioSesion?secret=44c4ec5dec97a44efa4ade06f7eb4b27030ffc980c5d6960c333c4fa5581734f";
         const result = fetch(url, {
@@ -61,21 +67,23 @@ export const Register = ()=>{
             })
         }).then(res => res.json()).then(info => {
             setData(info.token);
-            sessionStorage.setItem('username', usuario);
+            if(info.token.length === 129 ){
+                sessionStorage.setItem('username', usuario);
+            }
         });
     }
     return(
-        <ContextExternos.Provider value={{ userExterno: userexterno, userConfival: userconfival}}>
+        <ContextExternos.Provider value={{ userExterno: userexterno, userConfival: userconfival, twoFA: valid2FA}}>
             <div>
-                    <div>
+                    <div >
                         {data === undefined ? 
-                            <div >
+                            <div style={{backgroundColor: '#17202A'}}>
                                 <div>
                                     <Row style={{alignItems: 'center', display: "flex", justifyContent: 'center'}}>
-                                        <h1>Login page</h1><br/>
+                                        <h1 style={{ color: '#FDFEFE'}} >Login page</h1><br/>
                                     </Row>
                                     <Row style={{alignItems: 'center', display: "flex", justifyContent: 'center'}}>
-                                        <p>contraseña o usuario incorrecto</p>
+                                        <p style={{ color: '#FDFEFE'}}>contraseña o usuario incorrecto</p>
                                     </Row>
                                 </div>
                                 <div>
@@ -94,7 +102,7 @@ export const Register = ()=>{
                                                     <input type="password" placeholder="***********" onChange={(e)=>(contrasenia = e.target.value)}className="from-control"></input><br/>
                                                 </div><br/>
                                                 <div className="form-group">
-                                                    <button onClick={login} className="btn btn-primary">Login</button><br/>
+                                                    <Button type="primary" style={{backgroundColor: '#5DADE2'}} onClick={login}>Login</Button><br/>
                                                 </div>
                                                 <br/><hr />
                                                 <SignInButton />
@@ -106,11 +114,13 @@ export const Register = ()=>{
                         : 
                         userconfival.length > 0 ? <Sidebar /> 
                         :
+                        valid2FA === true ? <Sidebar /> 
+                        : 
                         data === "" ?
-                        <div >
+                        <div style={{backgroundColor: '#17202A'}}>
                             <div>
                                 <Row style={{alignItems: 'center', display: "flex", justifyContent: 'center'}}>
-                                    <h1>Login page</h1>
+                                    <h1 style={{ color: '#FDFEFE'}} >Login page</h1>
                                 </Row>
                             </div>
                             <div>
@@ -129,7 +139,7 @@ export const Register = ()=>{
                                                 <input type="password" placeholder="***********" onChange={(e)=>(contrasenia = e.target.value)}className="from-control"></input><br/>
                                             </div><br/>
                                             <div className="form-group">
-                                                <button onClick={login} className="btn btn-primary">Login</button><br/>
+                                                <Button type="primary" style={{backgroundColor: '#5DADE2'}} onClick={login}>Login</Button><br/>
                                             </div>
                                             <br/><hr />
                                             <SignInButton />
@@ -141,8 +151,6 @@ export const Register = ()=>{
                         : 
                         data.length === 129  ? <Inicio />  
                         :
-                        // userexterno.length > 0 ? <Home />
-                        // : 
                         data = null }
                     </div>
                 </div>

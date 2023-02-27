@@ -34,16 +34,20 @@ const Sidebar = () => {
 
 function Header(){
     const context = useContext(ContextExternos)
+    console.log(context);
     var usuarioLogin = "";
     if(context.userConfival === ""){
-        usuarioLogin = context.userExterno
+        var stage = context.userExterno.toString();
+        usuarioLogin = stage.replace('2FA', '');
     }else{
         usuarioLogin = context.userConfival
     }
+
     function SignOut(){
         sessionStorage.clear();
         window.location.reload();
     }
+    
     return(
         <>
             <Row style={{textAlign: 'center', height: 60, backgroundColor: '#17202A', color: '#FDFEFE'}}>

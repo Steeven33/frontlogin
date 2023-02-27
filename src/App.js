@@ -8,7 +8,7 @@ import { Provider } from "./Context/ContextExternos"
   return (
     <Provider>
       <MsalProvider instance={msalInstance}>
-            <div className="App">
+            <div className="App" >
               <header className="App-header">
                 <Register />
               </header>

@@ -17,9 +17,8 @@ const Inicio = () => {
     const context = useContext(ContextExternos);
     const [btn, setBtn] = useState(false);
     const [code2FA2, setCode2FA2] = useState(null);
-    const [twoFA, setTwoFA] = useState(null);
     let currentAccountE = sessionStorage.getItem('username')
-
+    console.log(context);
  
     function onSignup(){
         setBtn(true);
@@ -46,12 +45,11 @@ const Inicio = () => {
     
     function onOTPVerify(){
         setLoading(true);
-        console.log(otp);
-        console.log(code2FA2)
         if(otp.toString() === code2FA2.toString()){
             setOtpvalid(true);
             setLoading(false);
-            setTwoFA(true);
+            sessionStorage.setItem('username', context.userExterno + "2FA");
+
         }else{
             setBtn(false);
             toast.success('Codigo 2FA erroneo');
@@ -66,7 +64,7 @@ const Inicio = () => {
 
     return(
         <>
-        <ContextExternos.Provider value={{ twoFASuccess: twoFA, userExterno: currentAccountE, userConfival: "" }}>
+        <ContextExternos.Provider value={{userExterno: currentAccountE, userConfival: "" }}>
             {otpvalid === false ? 
                 <div style={{ backgroundColor:"#17202A", display: "flex", height: '100vh',alignItems: 'center', justifyContent: 'center' }}>
                     <div>

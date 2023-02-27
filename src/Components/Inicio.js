@@ -17,22 +17,24 @@ const Inicio = () => {
     const context = useContext(ContextExternos);
     const [btn, setBtn] = useState(false);
     const [code2FA2, setCode2FA2] = useState(null);
-    console.log(code2FA2);
+    const [twoFA, setTwoFA] = useState(null);
+    let currentAccountE = sessionStorage.getItem('username')
 
-
+ 
     function onSignup(){
         setBtn(true);
         setLoading(true);
-        setCode2FA2(Math.floor(100000 + Math.random() * 900000));
+        var twoFA = Math.floor(100000 + Math.random() * 900000);
+        setCode2FA2(twoFA);
         if(window.Email){
             window.Email.send({
                 Host : "smtp.elasticemail.com",
-                Username : "stev-medina@hotmail.com",
-                Password : "0D6C3B87C15E75F32771DDEE4F4E6B38EABA",
-                To : "steeven415@gmail.com",
-                From : "stev-medina@hotmail.com",
-                Subject : "This is the subject",
-                Body : "And this is the body2"
+                Username : "automatizacion@confival.com",
+                Password : "846BD6632A7FBDE0B0E1DDCEE4D50A6F39BC",
+                To : "stev-medina@hotmail.com",
+                From : "steeven415@gmail.com",
+                Subject : "Inicio sesion Valuez BPM",
+                Body : "El codigo 2FA para su inicio de sesion es: " + twoFA + "."
             }).then(()=> {
                 toast.success('Codigo 2FA enviado exitosamente');
                 setLoading(false);
@@ -44,10 +46,17 @@ const Inicio = () => {
     
     function onOTPVerify(){
         setLoading(true);
-        // logica que me permita comparar las dos variables
-
+        console.log(otp);
+        console.log(code2FA2)
+        if(otp.toString() === code2FA2.toString()){
+            setOtpvalid(true);
+            setLoading(false);
+            setTwoFA(true);
+        }else{
+            setBtn(false);
+            toast.success('Codigo 2FA erroneo');
+        }
         setLoading(false);
-
     }
 
     function SignOut(){
@@ -57,6 +66,7 @@ const Inicio = () => {
 
     return(
         <>
+        <ContextExternos.Provider value={{ twoFASuccess: twoFA, userExterno: currentAccountE, userConfival: "" }}>
             {otpvalid === false ? 
                 <div style={{ backgroundColor:"#17202A", display: "flex", height: '100vh',alignItems: 'center', justifyContent: 'center' }}>
                     <div>
@@ -104,6 +114,7 @@ const Inicio = () => {
                     
                 </div>
             : <Sidebar />}
+            </ContextExternos.Provider>
         </>
     )
 }

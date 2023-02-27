@@ -3,8 +3,9 @@ import React, { useState, useEffect } from "react";
 import { useMsal } from "@azure/msal-react";
 import ContextExternos from './Context/ContextExternos';
 import Inicio from "./Components/Inicio";
-import { Card, Space, Row, Button } from "antd";
+import { Card, Space, Row, Button, Image } from "antd";
 import Sidebar from "./Components/Sidebar";
+import { FaUserCircle } from "react-icons/bs";
 
 
 export const Register = ()=>{
@@ -77,10 +78,14 @@ export const Register = ()=>{
             <>
                 <div style={{backgroundColor: '#17202A', height: '100vh',alignItems: 'center', justifyContent: 'center'}}>
                     {data === undefined ? 
-                        <div >
+                            <div ><div style={{alignItems: 'center', display: "flex", justifyContent: 'center'}}>
+                            <Row>
+                                <Image width={400} src="/Img/ImgValuezBPM.png" alt="" />
+                            </Row>
+                            </div>
                             <div>
                                 <Row style={{alignItems: 'center', display: "flex", justifyContent: 'center'}}>
-                                    <h1 style={{ color: '#FDFEFE'}} >Login page</h1><br/>
+                                    <h1 style={{ color: '#FDFEFE'}} >Bienvenido</h1><br/>
                                 </Row>
                                 <Row style={{alignItems: 'center', display: "flex", justifyContent: 'center'}}>
                                     <p style={{ color: '#FDFEFE'}}>contraseña o usuario incorrecto</p>
@@ -118,20 +123,25 @@ export const Register = ()=>{
                         : 
                         data === "" ?
                         <div style={{backgroundColor: '#17202A'}}>
+                            <div style={{alignItems: 'center', display: "flex", justifyContent: 'center'}}>
+                                <Row>
+                                    <Image width={400} src="/Img/ImgValuezBPM.png" alt="" />
+                                </Row>
+                            </div>
                             <div>
                                 <Row style={{alignItems: 'center', display: "flex", justifyContent: 'center'}}>
-                                    <h1 style={{ color: '#FDFEFE'}} >Login page</h1>
+                                    <h1 style={{ color: '#FDFEFE'}} >Bienvenido</h1>
                                 </Row>
                             </div>
                             <div>
                                 <Row style={{alignItems: 'center', display: "flex", justifyContent: 'center'}}>
                                     <Space direction="Vertical" size={16}>
                                         <Card 
-                                            title="Valuez BPM" 
+                                            title="Inicio de sesion" 
                                             style={{width: 300}}>
                                             <div className="form-group">
-                                                <label>Usuario<span className="errmsg">*</span></label><br/>
-                                                <input type="text" placeholder="tonystark@hotmaill.com" onChange={(e)=>(usuario = e.target.value)} className="from-control"></input>
+                                                <label> Usuario<span className="errmsg">*</span></label><br/>
+                                                <input type="text" placeholder="usuario@mail.com" onChange={(e)=>(usuario = e.target.value)} className="from-control"></input>
                                             </div>
                                             <br/>
                                             <div className="form-group">

@@ -74,43 +74,43 @@ export const Register = ()=>{
     }
     return(
         <ContextExternos.Provider value={{ userExterno: userexterno, userConfival: userconfival, twoFA: valid2FA}}>
-            <div>
-                    <div >
-                        {data === undefined ? 
-                            <div style={{backgroundColor: '#17202A'}}>
-                                <div>
-                                    <Row style={{alignItems: 'center', display: "flex", justifyContent: 'center'}}>
-                                        <h1 style={{ color: '#FDFEFE'}} >Login page</h1><br/>
-                                    </Row>
-                                    <Row style={{alignItems: 'center', display: "flex", justifyContent: 'center'}}>
-                                        <p style={{ color: '#FDFEFE'}}>contraseña o usuario incorrecto</p>
-                                    </Row>
-                                </div>
-                                <div>
-                                    <Row style={{alignItems: 'center', display: "flex", justifyContent: 'center'}}>
-                                        <Space direction="Vertical" size={16}>
-                                            <Card 
-                                                title="Valuez BPM" 
-                                                style={{width: 300}}>
-                                                <div className="form-group">
-                                                        <label>Usuario<span className="errmsg">*</span></label><br/>
-                                                        <input type="text" placeholder="tonystark@hotmaill.com" onChange={(e)=>(usuario = e.target.value)} className="from-control"></input>
-                                                </div>
-                                                <br/>
-                                                <div className="form-group">
-                                                    <label>Password<span className="errmsg">*</span></label><br/>
-                                                    <input type="password" placeholder="***********" onChange={(e)=>(contrasenia = e.target.value)}className="from-control"></input><br/>
-                                                </div><br/>
-                                                <div className="form-group">
-                                                    <Button type="primary" style={{backgroundColor: '#5DADE2'}} onClick={login}>Login</Button><br/>
-                                                </div>
-                                                <br/><hr />
-                                                <SignInButton />
-                                            </Card>
-                                        </Space>
-                                    </Row>
-                                </div>
+            <>
+                <div style={{backgroundColor: '#17202A', height: '100vh',alignItems: 'center', justifyContent: 'center'}}>
+                    {data === undefined ? 
+                        <div >
+                            <div>
+                                <Row style={{alignItems: 'center', display: "flex", justifyContent: 'center'}}>
+                                    <h1 style={{ color: '#FDFEFE'}} >Login page</h1><br/>
+                                </Row>
+                                <Row style={{alignItems: 'center', display: "flex", justifyContent: 'center'}}>
+                                    <p style={{ color: '#FDFEFE'}}>contraseña o usuario incorrecto</p>
+                                </Row>
                             </div>
+                            <div>
+                                <Row style={{alignItems: 'center', display: "flex", justifyContent: 'center'}}>
+                                    <Space direction="Vertical" size={16}>
+                                        <Card 
+                                            title="Valuez BPM" 
+                                            style={{width: 300}}>
+                                            <div className="form-group">
+                                                    <label>Usuario<span className="errmsg">*</span></label><br/>
+                                                    <input type="text" placeholder="tonystark@hotmaill.com" onChange={(e)=>(usuario = e.target.value)} className="from-control"></input>
+                                            </div>
+                                            <br/>
+                                            <div className="form-group">
+                                                <label>Password<span className="errmsg">*</span></label><br/>
+                                                <input type="password" placeholder="***********" onChange={(e)=>(contrasenia = e.target.value)}className="from-control"></input><br/>
+                                            </div><br/>
+                                            <div className="form-group">
+                                                <Button type="primary" style={{backgroundColor: '#5DADE2'}} onClick={login}>Login</Button><br/>
+                                            </div>
+                                            <br/><hr />
+                                            <SignInButton />
+                                        </Card>
+                                    </Space>
+                                </Row>
+                            </div>
+                        </div>
                         : 
                         userconfival.length > 0 ? <Sidebar /> 
                         :
@@ -137,11 +137,13 @@ export const Register = ()=>{
                                             <div className="form-group">
                                                 <label>Password<span className="errmsg">*</span></label><br/>
                                                 <input type="password" placeholder="***********" onChange={(e)=>(contrasenia = e.target.value)}className="from-control"></input><br/>
-                                            </div><br/>
+                                            </div>
+                                            <br/>
                                             <div className="form-group">
                                                 <Button type="primary" style={{backgroundColor: '#5DADE2'}} onClick={login}>Login</Button><br/>
                                             </div>
-                                            <br/><hr />
+                                            <br/>
+                                            <hr />
                                             <SignInButton />
                                         </Card>
                                     </Space>
@@ -151,11 +153,11 @@ export const Register = ()=>{
                         : 
                         data.length === 129  ? <Inicio />  
                         :
-                        data = null }
-                    </div>
+                        data = null 
+                    }
                 </div>
+            </>
       </ContextExternos.Provider>
-
     )
 }
 export default Register

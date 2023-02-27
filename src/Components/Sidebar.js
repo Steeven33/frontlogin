@@ -20,7 +20,7 @@ const Sidebar = () => {
                 <div >
                     <Header />
                 </div>
-                <div style={{display: "flex", flexDirection: 'row', flex: 1}}>
+                <div style={{ backgroundColor: '#FDFEFE', display: "flex", flexDirection: 'row', flex: 1}}>
                     <SiderMenu />
                     <Content />
                 </div>

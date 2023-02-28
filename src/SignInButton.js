@@ -1,5 +1,4 @@
 import { useMsal } from '@azure/msal-react';
-import { Button } from "antd";
 
 export const SignInButton = () => {
     const { instance } = useMsal();
@@ -11,7 +10,12 @@ export const SignInButton = () => {
         
     }
     return (
-        <Button type="primary" style={{backgroundColor: '#2ECC71'}} onClick={handleSignIn}>Login with Microsoft</Button> 
+        <>
+        <div className='cursor'>
+            <label style={{color: '#17202A'}}><strong>Continuar con: </strong></label><br/><br/>
+            <img width={150} src="/Img/Microsoft365.svg" alt="" onClick={handleSignIn} />
+        </div>
+        </>
         
     )
 };

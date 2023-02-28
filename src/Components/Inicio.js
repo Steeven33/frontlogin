@@ -18,7 +18,6 @@ const Inicio = () => {
     const [btn, setBtn] = useState(false);
     const [code2FA2, setCode2FA2] = useState(null);
     let currentAccountE = sessionStorage.getItem('username')
-    console.log(context);
  
     function onSignup(){
         setBtn(true);

@@ -5,7 +5,9 @@ import ContextExternos from './Context/ContextExternos';
 import Inicio from "./Components/Inicio";
 import { Card, Space, Row, Button, Image } from "antd";
 import Sidebar from "./Components/Sidebar";
-import { FaUserCircle } from "react-icons/bs";
+import { BsPersonCircle, BsFillShieldLockFill } from "react-icons/bs";
+
+
 
 
 export const Register = ()=>{
@@ -13,7 +15,7 @@ export const Register = ()=>{
     // variables
     var usuario = "";
     var contrasenia = "";
-    var id = "8b4d2abb-713b-4731-a7b0-d89b358cb8eb";
+    var id = "1fd17bc3-8370-4875-9e6b-7c7cf98e52b1";
 
     const [data, setData] = useState("");
     const { instance } = useMsal();
@@ -29,7 +31,7 @@ export const Register = ()=>{
             var nombreUsuario = currentAccount.username;
             setUserconfival(nombreUsuario);
         }else{
-            var mantener = "lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll8888888888888888888888888888888llllllllllllllllllllllllllllllluuuuuu";
+            var mantener = "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp";
             if(currentAccountE !== null ){
                 if(currentAccountE.includes("2FA")){
                     setUserexterno(currentAccountE)
@@ -68,7 +70,7 @@ export const Register = ()=>{
             })
         }).then(res => res.json()).then(info => {
             setData(info.token);
-            if(info.token.length === 129 ){
+            if(info.token.length === 177 ){
                 sessionStorage.setItem('username', usuario);
             }
         });
@@ -78,14 +80,15 @@ export const Register = ()=>{
             <>
                 <div style={{backgroundColor: '#17202A', height: '100vh',alignItems: 'center', justifyContent: 'center'}}>
                     {data === undefined ? 
-                            <div ><div style={{alignItems: 'center', display: "flex", justifyContent: 'center'}}>
-                            <Row>
-                                <Image width={400} src="/Img/ImgValuezBPM.png" alt="" />
-                            </Row>
+                            <div style={{backgroundColor: '#17202A'}}>
+                            <div style={{alignItems: 'center', display: "flex", justifyContent: 'center'}}>
+                                <Row>
+                                    <Image width={400} src="/Img/ImgValuezBPM.png" alt="" />
+                                </Row>
                             </div>
                             <div>
                                 <Row style={{alignItems: 'center', display: "flex", justifyContent: 'center'}}>
-                                    <h1 style={{ color: '#FDFEFE'}} >Bienvenido</h1><br/>
+                                    <h1 style={{ color: '#FDFEFE'}} >Bienvenido</h1>
                                 </Row>
                                 <Row style={{alignItems: 'center', display: "flex", justifyContent: 'center'}}>
                                     <p style={{ color: '#FDFEFE'}}>contraseña o usuario incorrecto</p>
@@ -95,21 +98,23 @@ export const Register = ()=>{
                                 <Row style={{alignItems: 'center', display: "flex", justifyContent: 'center'}}>
                                     <Space direction="Vertical" size={16}>
                                         <Card 
-                                            title="Valuez BPM" 
-                                            style={{width: 300}}>
+                                            title="Inicio de sesion" 
+                                            style={{width: 300, backgroundColor: '#D1D1D1'}}>
                                             <div className="form-group">
-                                                    <label>Usuario<span className="errmsg">*</span></label><br/>
-                                                    <input type="text" placeholder="tonystark@hotmaill.com" onChange={(e)=>(usuario = e.target.value)} className="from-control"></input>
+                                                <h6 style={{color: '#17202A'}}><BsPersonCircle /></h6><label style={{color: '#17202A'}}><strong>Usuario: </strong></label><br/>
+                                                <input type="text" onChange={(e)=>(usuario = e.target.value)} className="from-control"></input>
                                             </div>
                                             <br/>
                                             <div className="form-group">
-                                                <label>Password<span className="errmsg">*</span></label><br/>
-                                                <input type="password" placeholder="***********" onChange={(e)=>(contrasenia = e.target.value)}className="from-control"></input><br/>
-                                            </div><br/>
+                                                <h6 style={{color: '#17202A'}}><BsFillShieldLockFill /></h6><label style={{color: '#17202A'}}><strong>Password: </strong></label><br/>
+                                                <input type="password" onChange={(e)=>(contrasenia = e.target.value)}className="from-control"></input><br/>
+                                            </div>
+                                            <br/>
                                             <div className="form-group">
                                                 <Button type="primary" style={{backgroundColor: '#5DADE2'}} onClick={login}>Login</Button><br/>
                                             </div>
-                                            <br/><hr />
+                                            <br/>
+                                            <hr />
                                             <SignInButton />
                                         </Card>
                                     </Space>
@@ -138,15 +143,15 @@ export const Register = ()=>{
                                     <Space direction="Vertical" size={16}>
                                         <Card 
                                             title="Inicio de sesion" 
-                                            style={{width: 300}}>
+                                            style={{width: 300, backgroundColor: '#D1D1D1'}}>
                                             <div className="form-group">
-                                                <label> Usuario<span className="errmsg">*</span></label><br/>
-                                                <input type="text" placeholder="usuario@mail.com" onChange={(e)=>(usuario = e.target.value)} className="from-control"></input>
+                                                <h6 style={{color: '#17202A'}}><BsPersonCircle /></h6><label style={{color: '#17202A'}}><strong>Usuario: </strong></label><br/>
+                                                <input type="text" onChange={(e)=>(usuario = e.target.value)} className="from-control"></input>
                                             </div>
                                             <br/>
                                             <div className="form-group">
-                                                <label>Password<span className="errmsg">*</span></label><br/>
-                                                <input type="password" placeholder="***********" onChange={(e)=>(contrasenia = e.target.value)}className="from-control"></input><br/>
+                                                <h6 style={{color: '#17202A'}}><BsFillShieldLockFill /></h6><label style={{color: '#17202A'}}><strong>Password: </strong></label><br/>
+                                                <input type="password" onChange={(e)=>(contrasenia = e.target.value)}className="from-control"></input><br/>
                                             </div>
                                             <br/>
                                             <div className="form-group">
@@ -161,7 +166,7 @@ export const Register = ()=>{
                             </div>
                         </div>
                         : 
-                        data.length === 129  ? <Inicio />  
+                        data.length === 177  ? <Inicio />  
                         :
                         data = null 
                     }

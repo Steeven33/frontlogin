@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {Menu} from "antd"
 import { Route, Routes, useNavigate } from "react-router-dom";
 import {
@@ -12,58 +12,67 @@ import ContextExternos from "../Context/ContextExternos";
 import {Row, Col} from "antd"
 import { SignOutButton } from "./SignOutButton";
 import { Button } from 'antd';
+import context from "react-bootstrap/esm/AccordionContext";
+import Header from "./Header";
+
 
 const Sidebar = () => {
-    return(
-        <>
-            <div style={{ display: "flex", flexDirection: 'column', flex: 1, height: '100vh' }}>
-                <div >
-                    <Header />
-                </div>
-                <div style={{ backgroundColor: '#FDFEFE', display: "flex", flexDirection: 'row', flex: 1}}>
-                    <SiderMenu />
-                    <Content />
-                </div>
-                <div >
-                    <Footer />
-                </div>
-            </div>
-        </>
-    )
-}
-
-function Header(){
-    const context = useContext(ContextExternos)
+    const context = useContext(ContextExternos);
     console.log(context);
-    var usuarioLogin = "";
-    if(context.userConfival === ""){
-        var stage = context.userExterno.toString();
-        usuarioLogin = stage.replace('2FA', '');
-    }else{
-        usuarioLogin = context.userConfival
-    }
 
-    function SignOut(){
-        sessionStorage.clear();
-        window.location.reload();
-    }
-    
+
     return(
         <>
-            <Row style={{textAlign: 'center', height: 60, backgroundColor: '#17202A', color: '#FDFEFE'}}>
-                <Col style={{alignItems: 'center', display: "flex", justifyContent: 'center'}}  span={7} >
-                    <p>logo</p>
-                </Col>
-                <Col style={{alignItems: 'center', display: "flex", justifyContent: 'center'}} span={9}>
-                    <h6><UserOutlined /></h6> <h4>Bienvenido, {usuarioLogin} </h4> 
-                </Col>
-                <Col style={{alignItems: 'center', display: "flex", justifyContent: 'end'}} span={7}>
-                    {context.userConfival === "" ? <Button type="primary" style={{ background: '#E74C3C', borderColor: '#7B241C' }} onClick={SignOut}>Sign Out</Button> : <SignOutButton />}
-                </Col>
-            </Row>
+            <ContextExternos.Provider value={{ userExterno: context.userExterno, userConfival: context.userConfival, twoFA: context.twoFA, tokenSave: context.tokenSave}}>
+                <div style={{ display: "flex", flexDirection: 'column', flex: 1, height: '100vh' }}>
+                    <div >
+                        <Header />
+                    </div>
+                    <div style={{ backgroundColor: '#FDFEFE', display: "flex", flexDirection: 'row', flex: 1}}>
+                        <SiderMenu />
+                        <Content />
+                    </div>
+                    <div >
+                        <Footer />
+                    </div>
+                </div>
+            </ContextExternos.Provider>
         </>
     )
 }
+
+// function Header(){
+//     const context = useContext(ContextExternos)
+//     console.log(context);
+//     var usuarioLogin = "";
+//     if(context.userConfival === ""){
+//         var stage = context.userExterno.toString();
+//         usuarioLogin = stage.replace('2FA', '');
+//     }else{
+//         usuarioLogin = context.userConfival
+//     }
+
+//     function SignOut(){
+//         sessionStorage.clear();
+//         window.location.reload();
+//     }
+    
+//     return(
+//         <>
+//             <Row style={{textAlign: 'center', height: 60, backgroundColor: '#17202A', color: '#FDFEFE'}}>
+//                 <Col style={{alignItems: 'center', display: "flex", justifyContent: 'center'}}  span={7} >
+//                     <p>logo</p>
+//                 </Col>
+//                 <Col style={{alignItems: 'center', display: "flex", justifyContent: 'center'}} span={9}>
+//                     <h6><UserOutlined /></h6> <h4>Bienvenido, {usuarioLogin} </h4> 
+//                 </Col>
+//                 <Col style={{alignItems: 'center', display: "flex", justifyContent: 'end'}} span={7}>
+//                     {context.userConfival === "" ? <Button type="primary" style={{ background: '#E74C3C', borderColor: '#7B241C' }} onClick={SignOut}>Sign Out</Button> : <SignOutButton />}
+//                 </Col>
+//             </Row>
+//         </>
+//     )
+// }
 
 function Footer(){
     return(
@@ -71,10 +80,7 @@ function Footer(){
             <div style={{
                 height: 60,
                 backgroundColor: '#515A5A',
-                color: '#17202A',
-                // display: 'flex',
-                // justifyContent: 'center',
-                // alignItems: 'center',
+                color: '#17202A'
             }}>
                 <Row>
                     <h5>Valuez BPM</h5>
@@ -89,6 +95,24 @@ function Footer(){
 
 function SiderMenu(){
     const navigate = useNavigate()
+    const [menu, setMenu] = useState([]);
+    var url = "/api/menu";
+
+    useEffect(() => {
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': 'bearer ' + context.tokenSave
+            }
+        }).then(res => res.json()).then(info => {
+            setMenu(info)
+            console.log(info);
+        });
+    }, []);
+    // console.log(menu);
+
     return(
         <>
             <Menu 

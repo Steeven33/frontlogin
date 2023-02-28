@@ -17,7 +17,10 @@ const Inicio = () => {
     const context = useContext(ContextExternos);
     const [btn, setBtn] = useState(false);
     const [code2FA2, setCode2FA2] = useState(null);
-    let currentAccountE = sessionStorage.getItem('username')
+    let currentAccountE = sessionStorage.getItem('username');
+
+
+    console.log(context);
  
     function onSignup(){
         setBtn(true);
@@ -63,7 +66,7 @@ const Inicio = () => {
 
     return(
         <>
-        <ContextExternos.Provider value={{userExterno: currentAccountE, userConfival: "" }}>
+        <ContextExternos.Provider value={{userExterno: currentAccountE, userConfival: "", tokenSave: context.tokenSave, twoFA: context.twoFA }}>
             {otpvalid === false ? 
                 <div style={{ backgroundColor:"#17202A", display: "flex", height: '100vh',alignItems: 'center', justifyContent: 'center' }}>
                     <div>

@@ -16,13 +16,16 @@ export const Register = ()=>{
     var usuario = "";
     var contrasenia = "";
     var id = "1fd17bc3-8370-4875-9e6b-7c7cf98e52b1";
-
+    
     const [data, setData] = useState("");
     const { instance } = useMsal();
     const [userconfival, setUserconfival] = useState('');
     const [userexterno, setUserexterno] = useState('');
     const [valid2FA, setValid2FA] = useState(false);
+    const [token, setToken] = useState('');
 
+    // const prueba = useContext(ContextToken)
+    
     // mantiene el context de microsoft con login y de lo contrario mantiene el context ContextExternos
     useEffect(() => {
         const currentAccount = instance.getActiveAccount();
@@ -36,7 +39,7 @@ export const Register = ()=>{
                 if(currentAccountE.includes("2FA")){
                     setUserexterno(currentAccountE)
                     setValid2FA(true)
-
+                    
                 }else{
                     setData(mantener)
                     setUserexterno(currentAccountE)
@@ -44,8 +47,6 @@ export const Register = ()=>{
             }
         }
     }, [instance]);
-
-    console.log(valid2FA);
     
     // permiste iniciar sesion de externos
     function login(){
@@ -72,11 +73,13 @@ export const Register = ()=>{
             setData(info.token);
             if(info.token.length === 177 ){
                 sessionStorage.setItem('username', usuario);
+                setToken(info.token);
             }
         });
     }
+
     return(
-        <ContextExternos.Provider value={{ userExterno: userexterno, userConfival: userconfival, twoFA: valid2FA}}>
+        <ContextExternos.Provider value={{ userExterno: userexterno, userConfival: userconfival, twoFA: valid2FA, tokenSave: token}}>
             <>
                 <div style={{backgroundColor: '#17202A', height: '100vh',alignItems: 'center', justifyContent: 'center'}}>
                     {data === undefined ? 

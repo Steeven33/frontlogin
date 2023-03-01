@@ -1,8 +1,7 @@
 import { SignInButton } from "./SignInButton"
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useMsal } from "@azure/msal-react";
 import ContextExternos from './Context/ContextExternos';
-import Inicio from "./Components/Inicio";
 import { Card, Space, Row, Button, Image } from "antd";
 import Sidebar from "./Components/Sidebar";
 import { BsPersonCircle, BsFillShieldLockFill } from "react-icons/bs";
@@ -170,7 +169,8 @@ export const Register = ()=>{
                             </div>
                         </div>
                         : 
-                        data.length === 177  ? <Inicio />  
+                        // data.length === 177  ? <Inicio />  
+                        data.length === 177  ? <Sidebar />  
                         :
                         data = null 
                     }

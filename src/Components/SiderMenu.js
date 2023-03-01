@@ -8,6 +8,7 @@ import {
     KeyOutlined,
 } from "@ant-design/icons/lib/icons";
 import ContextExternos from "../Context/ContextExternos";
+import RouteDTO from "../DTO/RouteDTO";
 
 export const Sidermenu = () => {
 
@@ -58,16 +59,6 @@ export const Sidermenu = () => {
         return element !== undefined;
     });
 
-    var route = [];
-    var x = lst.map((item) => {
-        if(item.children !== undefined){
-            var y = item.children.map((subitem)=>{
-                route.push(subitem)
-            })
-        }
-    })
-    console.log(x);
-
     return(
         <>
             <ContextExternos.Provider value={{ userExterno: context.userExterno, userConfival: context.userConfival, twoFA: context.twoFA, tokenSave: context.tokenSave}}>
@@ -76,21 +67,12 @@ export const Sidermenu = () => {
                     defaultSelectedKeys={[window.location.pathname]}
                     items={lst}>
                 </Menu>
-                <Routes>
-                    <Route path="/revision" element={<div>Revision</div>}></Route>
-                    <Route path="/oportunidades" element={<div>Oportunidades</div>}></Route>
-                    <Route path="/casos" element={<div>Casos</div>}></Route>
-                    <Route path="/regimen" element={<div>Regimen</div>}></Route>
-                    <Route path="/articulo" element={<div>Articulo</div>}></Route>
-                    <Route path="/mediosControl" element={<div>Medios de control</div>}></Route>
-                    <Route path="/actuacion" element={<div>Actuacion</div>}></Route>
-                    <Route path="/verbo" element={<div>Verbo</div>}></Route>
-                    <Route path="/topoCorporacion" element={<div>Tipo corporacion</div>}></Route>
-                    <Route path="/corporacion" element={<div>Corporacion</div>}></Route>
-                    <Route path="/tipoProvidencia" element={<div>Tipo de providencia</div>}></Route>
-                    <Route path="/usuarios" element={<div>Usuarios</div>}></Route>
-                    <Route path="/configuracion" element={<div>Configuracion</div>}></Route>
-                </Routes>
+                    {menu.map((item) => {
+                        return <RouteDTO 
+                        key={item.id}
+                        nombre={item.nombre}
+                        />
+                    })}
             </ContextExternos.Provider>
         </>
     )

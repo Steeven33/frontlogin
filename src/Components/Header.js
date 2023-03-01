@@ -8,11 +8,7 @@ import { SignOutButton } from "./SignOutButton";
 import { Button } from 'antd';
 
 const Header = () => {
-
-    
-    
     const context = useContext(ContextExternos)
-    console.log(context);
     var usuarioLogin = "";
     if(context.userConfival === ""){
         var stage = context.userExterno.toString();

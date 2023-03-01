@@ -20,8 +20,6 @@ const Inicio = () => {
     let currentAccountE = sessionStorage.getItem('username');
 
 
-    console.log(context);
- 
     function onSignup(){
         setBtn(true);
         setLoading(true);

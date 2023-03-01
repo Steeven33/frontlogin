@@ -3,6 +3,7 @@ import { MsalProvider} from "@azure/msal-react";
 import { Register } from './Register';
 import { Provider } from "./Context/ContextExternos"
 
+
  function App({msalInstance}) {
 
   return (

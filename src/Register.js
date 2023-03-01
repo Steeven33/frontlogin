@@ -1,5 +1,5 @@
 import { SignInButton } from "./SignInButton"
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useMsal } from "@azure/msal-react";
 import ContextExternos from './Context/ContextExternos';
 import Inicio from "./Components/Inicio";
@@ -11,7 +11,7 @@ import { BsPersonCircle, BsFillShieldLockFill } from "react-icons/bs";
 
 
 export const Register = ()=>{
-
+    // console.log("prueba sobre carga");
     // variables
     var usuario = "";
     var contrasenia = "";
@@ -23,8 +23,8 @@ export const Register = ()=>{
     const [userexterno, setUserexterno] = useState('');
     const [valid2FA, setValid2FA] = useState(false);
     const [token, setToken] = useState('');
+    // setToken(save);
 
-    // const prueba = useContext(ContextToken)
     
     // mantiene el context de microsoft con login y de lo contrario mantiene el context ContextExternos
     useEffect(() => {
@@ -73,6 +73,7 @@ export const Register = ()=>{
             setData(info.token);
             if(info.token.length === 177 ){
                 sessionStorage.setItem('username', usuario);
+                sessionStorage.setItem('token', info.token);
                 setToken(info.token);
             }
         });

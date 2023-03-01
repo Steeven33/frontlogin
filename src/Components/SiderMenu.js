@@ -9,17 +9,13 @@ import {
 } from "@ant-design/icons/lib/icons";
 import ContextExternos from "../Context/ContextExternos";
 
-
-
 export const Sidermenu = () => {
 
     const navigate = useNavigate()
     const [menu, setMenu] = useState([]);
-    var url = "/api/menu";
+    var url = "/api/menu?Pagina=1&RegistrosPorPagina=50";
     const context = useContext(ContextExternos);
- 
     let token = sessionStorage.getItem('token');
-
     useEffect(()=>{
         fetch(url, {
             method: 'GET',
@@ -31,10 +27,46 @@ export const Sidermenu = () => {
         }).then(res => res.json()).then(info => {
             setMenu(info)
         });
+    }, []);
+    console.log(menu)
 
-    }, [])
+    /// variale lst ordena el resultado de la API para pintar el menu en SiderMenu
+    var lst = menu.map((item) =>{
+        if(item.padreId === 0){
+            var submenu = menu.map((subitem)=> {
+                if(subitem.padreId === item.id){
+                    return(
+                        {label: subitem.nombre , key: "/" + subitem.nombre}
+                    )
+                }
+            })
+            submenu = submenu.filter(function(element){
+                return element !== undefined;
+            });
+            if(submenu.length === 0){
+                return(
+                    {label: item.nombre, key: "/" + item.nombre}
+                )
+            }else{
+                return(
+                    {label: item.nombre, key: "/" + item.nombre, children: submenu}
+                )
+            }
+        }
+    })
+    lst = lst.filter(function(element){
+        return element !== undefined;
+    });
 
-    console.log(menu);
+    var route = [];
+    var x = lst.map((item) => {
+        if(item.children !== undefined){
+            var y = item.children.map((subitem)=>{
+                route.push(subitem)
+            })
+        }
+    })
+    console.log(x);
 
     return(
         <>
@@ -42,33 +74,7 @@ export const Sidermenu = () => {
                 <Menu 
                     onClick={({ key }) => { navigate(key) }}
                     defaultSelectedKeys={[window.location.pathname]}
-                    items={[
-                        { label: "Documentos", key: "/documentos", icon: <DatabaseOutlined />, 
-                        children: [
-                            { label: "Revisión", key: "/revision"},
-                        ]
-                    },
-                    { label: "Operaciones", key: "/operaciones", icon:<AreaChartOutlined />,
-                    children:[
-                        {label: "Oportunidades", key: "/oportunidades"},
-                        {label: "Casos", key: "/casos"},
-                    ]
-                    },
-                    { label: "Administracion", key: "/administracion", icon: <ToolOutlined />,
-                    children: [
-                        {label: "Regimen", key: "/regimen"},
-                        {label: "Articulo", key: "/articulo"},
-                        {label: "Medios de control", key: "/mediosControl"},
-                        {label: "Actuacion", key: "/actuacion"},
-                        {label: "Verbo", key: "/verbo"},
-                        {label: "Tipo corporacion", key: "/topoCorporacion"},
-                        {label: "Corporacion", key: "/corporacion"},
-                        {label: "Tipo de providencia", key: "/tipoProvidencia"},
-                        {label: "Usuarios", key: "/usuarios"},
-                    ]
-                    },
-                    { label: "Configuracion", key: "/configuracion", icon: <KeyOutlined />}    
-                    ]}>
+                    items={lst}>
                 </Menu>
                 <Routes>
                     <Route path="/revision" element={<div>Revision</div>}></Route>

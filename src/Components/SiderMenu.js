@@ -40,7 +40,6 @@ export const Sidermenu = () => {
             setMenu(info)
         });
     }, []);
-    console.log(menu)
 
     /// variale lst ordena el resultado de la API para pintar el menu en SiderMenu
     var lst = menu.map((item) =>{

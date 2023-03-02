@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-import PagaduriaDTO from "../DTO/PagaduriaDTO";
+import React, { useState, useEffect } from "react";
 import MUIDataTable from "mui-datatables";
-import { isLabelWithInternallyDisabledControl } from "@testing-library/user-event/dist/utils";
 
 const Verbo = () =>{
     const [pagadurias, setPagadurias] = useState(Array);
@@ -24,7 +22,7 @@ const Verbo = () =>{
         }
     ]
 
-    function Get(){
+    useEffect(()=>{
         var url = "/api/entidadpagaduria";
         const result = fetch(url, {
         method: 'GET',
@@ -36,17 +34,17 @@ const Verbo = () =>{
         var lst = info;
         setPagadurias(lst);
     });
-    }
+    }, [])
+
     return(
         <>
             <div>
                 <div>
                     <h3>Prueba datatable de pagadurias (17 registros) </h3>
-                    <button className="btn btn-primary" onClick={Get}>Obtener Pagadurias</button><br />
                 </div>
-                <div style={{alignItems: 'center', justifyContent: 'center' }}>
+                <div >
                     <MUIDataTable 
-                    title={"listado de pagadurias"}
+                    title={"Pagadurias"}
                     data={pagadurias}
                     columns={colums}
                     />
@@ -54,31 +52,7 @@ const Verbo = () =>{
             </div>
 
 
-            {/* <div>
-                <h3>Prueba datatable de pagadurias (17 registros) </h3>
-                <br />
-                <table className="table">
-                <thead>
-                <tr>
-                <th scope="col">Entidad</th>
-                <th scope="col">Nemo Tecnico</th>
-                <th scope="col">codigo Secundario 1</th>
-                <th scope="col">codigo Secundario 2</th>
-                </tr>
-                </thead>
-                <tbody>
-                {pagadurias.map((item) => {
-                    return <PagaduriaDTO
-                    key={item.id} 
-                    nombre={item.nombre}
-                    nemotecnico={item.nemotecnico}
-                    codSecundario1={item.codSecundario1}
-                    codSecundario2={item.codSecundario2}
-                    />
-                        })}
-                    </tbody>
-                    </table>
-                </div> */}
+           
         </>
     )
 }

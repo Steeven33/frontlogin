@@ -1,12 +1,7 @@
-import React, { useState, useContext } from "react";
-import ContextExternos from "../Context/ContextExternos";
+import React, { useState } from "react";
 import PagaduriaDTO from "../DTO/PagaduriaDTO";
 
 export const Home = ()=>{
-    const contextPrueba = useContext(ContextExternos)
-    console.log(contextPrueba);
-
-
     
 
     const [pagadurias, setPagadurias] = useState(Array);

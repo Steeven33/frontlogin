@@ -6,9 +6,6 @@ import { Card, Space, Row, Button, Image } from "antd";
 import Sidebar from "./Components/Sidebar";
 import { BsPersonCircle, BsFillShieldLockFill } from "react-icons/bs";
 
-
-
-
 export const Register = ()=>{
     // console.log("prueba sobre carga");
     // variables
@@ -22,8 +19,6 @@ export const Register = ()=>{
     const [userexterno, setUserexterno] = useState('');
     const [valid2FA, setValid2FA] = useState(false);
     const [token, setToken] = useState('');
-    // setToken(save);
-
     
     // mantiene el context de microsoft con login y de lo contrario mantiene el context ContextExternos
     useEffect(() => {
@@ -79,7 +74,7 @@ export const Register = ()=>{
     }
 
     return(
-        <ContextExternos.Provider value={{ userExterno: userexterno, userConfival: userconfival, twoFA: valid2FA, tokenSave: token}}>
+        <ContextExternos.Provider value={{ userExterno: userexterno, userConfival: userconfival, twoFA: valid2FA}}>
             <>
                 <div style={{backgroundColor: '#17202A', height: '100vh',alignItems: 'center', justifyContent: 'center'}}>
                     {data === undefined ? 

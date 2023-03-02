@@ -6,23 +6,19 @@ import SiderMenu from "./SiderMenu";
 
 
 const Sidebar = () => {
-    const context = useContext(ContextExternos);
-    // console.log(context);
     return(
         <>
-            <ContextExternos.Provider value={{ userExterno: context.userExterno, userConfival: context.userConfival, twoFA: context.twoFA, tokenSave: context.tokenSave}}>
-                <div style={{ display: "flex", flexDirection: 'column', flex: 1, height: '100vh' }}>
-                    <div >
-                        <Header />
-                    </div>
-                    <div style={{ backgroundColor: '#FDFEFE', display: "flex", flexDirection: 'row', flex: 1}}>
-                        <SiderMenu />
-                    </div>
-                    <div >
-                        <Footer />
-                    </div>
+            <div style={{ display: "flex", flexDirection: 'column', flex: 1, height: '100vh' }}>
+                <div >
+                    <Header />
                 </div>
-            </ContextExternos.Provider>
+                <div style={{ backgroundColor: '#FDFEFE', display: "flex", flexDirection: 'row', flex: 1}}>
+                    <SiderMenu />
+                </div>
+                <div >
+                    <Footer />
+                </div>
+            </div>
         </>
     )
 }
